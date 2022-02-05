@@ -1,0 +1,101 @@
+print("Answer to the question number 1")
+class Node:
+    def __init__(self, elem, left, right, parent):
+        self.elem = elem
+        self.left = left
+        self.right = right
+        self.parent = parent
+
+e = Node("e", None, None, None)
+f = Node("f", None, None, None)
+g = Node("g", None, None, None)
+d = Node("d", None, None, None)
+b = Node("b",d, e, None)
+c = Node("c", f, g, None)
+a = Node("a", b, c, None)
+c.parent = a
+b.parent = a
+d.parent = b
+e.parent = b
+f.parent = c
+g.parent = c
+
+def height(node):
+    if node is None:
+        return 0
+    return 1 + max(height(node.left), height(node.right))
+
+print(height(a))
+
+print("Answer to the question number 2")
+def level(node):
+    if node is None:
+        return 0
+    return 1 + level(node.parent)
+
+print(level(a))
+print(level(b))
+print(level(e))
+
+print("Answer to the question number 3")
+def preOrder(Node):
+    if Node is None:
+        return
+    print(Node.elem, end = " ")
+    preOrder(Node.left)
+    preOrder(Node.right)
+
+preOrder(a)
+
+print("Answer to the question number 4")
+print("")
+def inOrder(Node):
+    if Node is None:
+        return
+    inOrder(Node.left)
+    print(Node.elem, end = " ")
+    inOrder(Node.right)
+
+inOrder(a)
+
+print("")
+
+print("Answer to the question number 5")
+def postOrder(Node):
+    if Node is None:
+        return
+    postOrder(Node.left)
+    postOrder(Node.right)
+    print(Node.elem, end = " ")
+
+print("")
+
+print("Answer to the question number 6")
+e2 = Node("e", None, None, None)
+f2 = Node("f", None, None, None)
+g2 = Node("g", None, None, None)
+d2 = Node("d", None, None, None)
+b2 = Node("b",d2, e2, None)
+c2 = Node("c", f2, g2, None)
+a2 = Node("a", b2, c2, None)
+c2.parent = a2
+b2.parent = a2
+d2.parent = b2
+e2.parent = b2
+f2.parent = c2
+g2.parent = c2
+def checkSame(Node1, Node2):
+    if Node1 is None or Node2 is None:
+        return (Node1 is None and Node2 is None)
+    return Node1.elem == Node2.elem and checkSame(Node1.left, Node2.left) and checkSame(Node1.right, Node2.right)
+
+print(checkSame(a, a2))
+
+print("Answer to the question number 7")
+def copyTree(Node, parent):
+    if Node is None:
+        return None
+    return Node(Node.elem, copyTree(Node.left, Node), copyTree(Node.right, Node), parent)
+
+copy = copyTree(a, None)
+preOrder(copy)
